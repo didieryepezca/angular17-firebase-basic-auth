@@ -1,0 +1,104 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+  <!-- --------------------------------------------------------------- -->
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- Notification Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+
+  <!-- <button mat-icon-button aria-label="Notifications">
+    <i-tabler class="d-flex" name="bell" matBadge="9" matBadgeColor="primary"></i-tabler>
+  </button> -->
+
+  <span class="flex-1-auto"></span>
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <!-- <a
+    mat-flat-button
+    color="primary"
+    href="https://www.wrappixel.com/templates/spike-angular-admin-template/"
+    target="_blank"
+    class="d-flex justify-content-center"
+  >
+    Upgrade to Pro
+  </a> -->
+
+  <h1>¡Bienvenido(a) a Guía Pateperro! {{ authService.currentUserSignal()?.email }}</h1>
+  @if(authService.currentUserSignal() == null)  
+  {
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="userLoggedOutMenu"
+        aria-label="Notifications" class="m-l-10">
+        <img
+          src="/assets/images/profile/user-1.jpg"
+          class="rounded-circle object-cover"
+          width="35"
+        />
+      </button>
+
+      <mat-menu #userLoggedOutMenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+        <a [routerLink]="['/authentication/login']" mat-menu-item>
+          <mat-icon class="d-flex align-items-center"
+            ><i-tabler name="lock" class="icon-18 d-flex"></i-tabler></mat-icon
+          >Ingresar
+        </a>
+        <a [routerLink]="['/authentication/register']" mat-menu-item>
+          <mat-icon class="d-flex align-items-center"
+            ><i-tabler name="user-plus" class="icon-18 d-flex"></i-tabler></mat-icon
+          >Registrarme
+        </a>
+      </mat-menu>
+  }
+
+  @if(authService.currentUserSignal())
+  {
+    <button
+    mat-icon-button
+    [matMenuTriggerFor]="userLoggedMenu"
+    aria-label="Notifications" class="m-l-10">
+    <img
+      src="/assets/images/profile/user-1.jpg"
+      class="rounded-circle object-cover"
+      width="35"
+    />
+  </button>
+
+    <mat-menu #userLoggedMenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
+        >Mi Perfil
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
+        >Mis Servicios
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler
+            name="list-check"
+            class="icon-18 d-flex"
+          ></i-tabler></mat-icon
+        >Mi Agenda
+      </button>    
+        <div class="p-x-12 m-t-12">
+          <button
+            (click) ="logout()"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="w-100"
+            >Salir</button
+          >
+        </div>    
+    </mat-menu>
+  }
+
+</mat-toolbar>

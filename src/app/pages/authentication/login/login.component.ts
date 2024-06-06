@@ -30,7 +30,7 @@ export class AppSideLoginComponent {
       .login(this.formLogin.value.email!, this.formLogin.value.password!)
       .subscribe({
         next:()=>{
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/pst-services']);
         },
         error: (err) => {
           this.errorMessage = 'Ha ocurrido un error: '+ err.code;

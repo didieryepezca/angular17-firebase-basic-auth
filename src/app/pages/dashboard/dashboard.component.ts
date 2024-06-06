@@ -137,17 +137,17 @@ const ELEMENT_DATA: productsData[] = [
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    TablerIconsModule,
-    MatCardModule,
-    NgApexchartsModule,
-    MatTableModule,
-    CommonModule,
-  ],
+  //standalone: true,
+  // imports: [
+  //   MatButtonModule,
+  //   MatMenuModule,
+  //   MatIconModule,
+  //   TablerIconsModule,
+  //   MatCardModule,
+  //   NgApexchartsModule,
+  //   MatTableModule,
+  //   CommonModule,
+  // ],
 })
 export class AppDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);

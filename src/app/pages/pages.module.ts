@@ -8,6 +8,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
+import { PstServicesComponent } from './pst-services/pst-services.component';
+import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,10 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
     TablerIconsModule.pick(TablerIcons),    
        
   ],  
+  declarations:[
+    PstServicesComponent,
+    AppDashboardComponent
+  ],
   exports: [TablerIconsModule],       
   
 })

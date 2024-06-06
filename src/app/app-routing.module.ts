@@ -10,14 +10,20 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        //redirectTo: '/dashboard',
+        redirectTo: '/pst-services',
         pathMatch: 'full',
       },
       {
-        path: 'dashboard',
+        path: '',
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
+      // {
+      //   path: 'dashboard',
+      //   loadChildren: () =>
+      //     import('./pages/pages.module').then((m) => m.PagesModule),
+      // },      
       {
         path: 'ui-components',
         loadChildren: () =>

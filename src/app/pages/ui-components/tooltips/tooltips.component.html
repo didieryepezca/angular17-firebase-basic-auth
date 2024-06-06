@@ -1,10 +1,10 @@
 <mat-card class="cardWithShadow theme-card">
   <mat-card-header>
-    <mat-card-title class="m-b-0">Tooltips</mat-card-title>
+    <mat-card-title class="m-b-0">Proveedor de Servicios Turísticos (PST)</mat-card-title>
   </mat-card-header>
   <mat-card-content class="b-t-1">
     <div class="row">
-      <div class="col-lg-4 col-sm-6">
+      <!-- <div class="col-lg-4 col-sm-6">
         <mat-card class="b-1 shadow-none">
           <mat-card-header>
             <mat-card-title>Basic</mat-card-title>
@@ -36,7 +36,7 @@
             </button>
           </mat-card-content>
         </mat-card>
-      </div>
+      </div> 
       <div class="col-lg-4 col-sm-6">
         <mat-card class="b-1 shadow-none">
           <mat-card-header>
@@ -61,9 +61,9 @@
             </mat-checkbox>
           </mat-card-content>
         </mat-card>
-      </div>
+      </div> -->
 
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <mat-card class="b-1 shadow-none">
           <mat-card-header>
             <mat-card-title>Position</mat-card-title>
@@ -114,9 +114,9 @@
             </button>
           </mat-card-content>
         </mat-card>
-      </div>
+      </div> -->
 
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <mat-card class="b-1 shadow-none">
           <mat-card-header>
             <mat-card-title>Show and Hide</mat-card-title>
@@ -151,27 +151,62 @@
             </div>
           </mat-card-content>
         </mat-card>
-      </div>
+      </div> -->
 
-      <div class="col-lg-4 col-sm-6">
+      <div class="col-lg-12 col-sm-12">
         <mat-card class="b-1 shadow-none">
           <mat-card-header>
-            <mat-card-title>Change Message</mat-card-title>
+            <mat-card-title>Agrega tu Servicio</mat-card-title>
           </mat-card-header>
           <mat-card-content class="b-t-1">
             <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Tooltip message</mat-label>
-              <input matInput [formControl]="message" />
+              <mat-label>Nombre del Servicio</mat-label>
+              <input matInput [formControl]="ServiceName" />
             </mat-form-field>
 
-            <button
-              mat-flat-button
-              color="primary"
-              [matTooltip]="message.value || ''"
-              aria-label="Button that displays a tooltip with a custom message"
-            >
-              Action
-            </button>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Nombre del Anfitrión</mat-label>
+              <input matInput [formControl]="HostName" />
+            </mat-form-field>
+            
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Precio de tu servicio</mat-label>
+                <input matInput type="number" [formControl]="Price" />
+                <mat-hint>s/.</mat-hint>
+            </mat-form-field>  
+            
+            <!-- <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Imagen Principal</mat-label>
+              <input matInput type="file" (change)="onFileSelected($event)">
+              <mat-hint>s/.</mat-hint>
+            </mat-form-field>      -->
+
+
+            <div class="row">
+              <div class="col-lg-6 col-sm-6">               
+
+                <mat-checkbox
+                [formControl]="isPublished"
+                class="example-disabled-checkbox"
+              >
+                ¿ Deseas publicarlo ya ?
+              </mat-checkbox>
+            </div>
+              <div class="col-lg-4 col-sm-4">   
+             
+              </div>
+              <div class="col-lg-2 col-sm-2">
+                <button
+                mat-flat-button
+                color="primary"               
+                class="m-r-8"
+                (click)="addPst()"
+              >
+                Guardar
+              </button>
+              </div>
+            </div>
+
           </mat-card-content>
         </mat-card>
       </div>

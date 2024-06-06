@@ -31,6 +31,13 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from 'src/app/environments/environment';
 
+//Angular Firestore
+import { Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { PstService } from './services/pst.service';
+import { provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp } from 'firebase/app';
+import { PstContractService } from './contract/pst-contract.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,12 +59,17 @@ import { firebaseConfig } from 'src/app/environments/environment';
     TablerIconsModule.pick(TablerIcons),
     NgScrollbarModule,    
     //Firebase Auth modules.                
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule, 
+    AngularFireModule.initializeApp(firebaseConfig),    
+    AngularFireAuthModule,    
   ],
   exports: [TablerIconsModule],
   providers:[    
-    AuthService,    
+    AuthService, 
+    //Firebase Firestore
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),    
+    PstService,
+    PstContractService
   ],
   bootstrap: [AppComponent],
 })

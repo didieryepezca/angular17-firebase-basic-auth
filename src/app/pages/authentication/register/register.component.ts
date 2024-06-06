@@ -31,7 +31,7 @@ export class AppSideRegisterComponent {
       .register(this.formRegister.value.email!, this.formRegister.value.username!, this.formRegister.value.password!)
       .subscribe({
         next:()=>{
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/pst-services']);
         },
         error: (err) => {
           this.errorMessage = err.code;

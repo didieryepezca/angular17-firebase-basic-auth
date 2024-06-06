@@ -21,22 +21,20 @@ export class HeaderComponent implements OnInit {
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
-  user$ = this.authService.user$;
+  user = this.authService.userLogged;
   showFiller = false;
 
   constructor(public dialog: MatDialog, public authService: AuthService) {}
 
   ngOnInit(): void {
     //-----> verificar que el usuario se encuentre loggeado
-    this.user$.subscribe(user => {
-      if(user){
-        if(user){
+    this.user.subscribe(user => {
+      if(user){        
           //console.log('User is logged in:', user.email);
           this.authService.currentUserSignal.set({
             email: user.email!,
             username: user.displayName!
-          })
-        }                
+          })        
       }else{
         //console.log('User is logged out');
         this.authService.currentUserSignal.set(null);        

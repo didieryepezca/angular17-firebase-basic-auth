@@ -69,7 +69,7 @@ import { PstContractService } from './contract/pst-contract.service';
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),    
     PstService,
-    PstContractService
+    PstContractService    
   ],
   bootstrap: [AppComponent],
 })

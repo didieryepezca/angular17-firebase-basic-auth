@@ -4,9 +4,11 @@ import {
   EventEmitter,
   Input,
   ViewEncapsulation,
-  OnInit
+  OnInit,
+  computed, 
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UserInterface } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,27 +23,39 @@ export class HeaderComponent implements OnInit {
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
-  user = this.authService.userLogged;
+  userLogged = this.authService.userLogged;
+  userSig = this.authService.currentUserSignal;  
+  
   showFiller = false;
 
-  constructor(public dialog: MatDialog, public authService: AuthService) {}
-
-  ngOnInit(): void {
-    //-----> verificar que el usuario se encuentre loggeado
-    this.user.subscribe(user => {
-      if(user){        
-          //console.log('User is logged in:', user.email);
-          this.authService.currentUserSignal.set({
-            email: user.email!,
-            username: user.displayName!
-          })        
-      }else{
-        //console.log('User is logged out');
-        this.authService.currentUserSignal.set(null);        
-      }
-    })
-    //-------    
+  constructor(public dialog: MatDialog, public authService: AuthService) {
+    // effect(()=>{
+    //   this.user = this.authService.currentUserSignal()      
+    // })    
   }
+
+  ngOnInit(): void {      
+    // -----> verificar que el usuario se encuentre loggeado: 1 Forma  
+    this.userLogged.subscribe(userLogin => {
+      if(userLogin){          
+        const user: UserInterface = {
+          //id: userCredential.user.uid!,
+            username: userLogin.displayName!,
+            email: userLogin.email!,                                   
+          };
+          this.userSig.set(user);
+          //console.log(this.currentUserSignal());
+        }else{
+        //console.log('User is logged out');
+        this.userSig.set(null);        
+      }
+    })    
+    // -------      
+  }
+
+  loggedUser = computed(() => {
+    return this.authService.currentUserSignal();
+  });
 
   logout(): void{
     this.authService.logout();

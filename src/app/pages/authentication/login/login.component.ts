@@ -27,13 +27,14 @@ export class AppSideLoginComponent {
     //console.log(this.formLogin.value);
     //const rawForm = this.formRegister.getRawValue()    
       this.authService    
-      .login(this.formLogin.value.email!, this.formLogin.value.password!)
+      .login(this.formLogin.value.email!, this.formLogin.value.password!)      
       .subscribe({
         next:()=>{
           this.router.navigate(['/pst-services']);
         },
         error: (err) => {
-          this.errorMessage = 'Ha ocurrido un error: '+ err.code;
+          //console.log(err.message)
+          this.errorMessage = 'Ha ocurrido un error: '+ err.message;
         }       
       });        
   }

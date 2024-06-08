@@ -28,9 +28,10 @@
     Upgrade to Pro
   </a> -->
 
-  <h1>¡Bienvenido(a)! {{ authService.currentUserSignal()?.email }}</h1>
-  @if(authService.currentUserSignal() == null)  
-  {
+  <h1>¡Bienvenido(a)! {{ loggedUser()?.email }}</h1> 
+  
+  @if(loggedUser() == null)  
+  { 
     <button
         mat-icon-button
         [matMenuTriggerFor]="userLoggedOutMenu"
@@ -54,9 +55,9 @@
           >Registrarme
         </a>
       </mat-menu>
-  }
+  } 
 
-  @if(authService.currentUserSignal())
+  @if(loggedUser())
   {
     <button
     mat-icon-button

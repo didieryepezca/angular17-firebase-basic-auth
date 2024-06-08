@@ -3,3 +3,9 @@ export enum FilterEnum {
     published = 'published',
     noPublished = 'noPublished',
   }
+
+export enum FilerUserRolesMenuEnum{
+  administrador = 'administrador',
+  pst = 'pst',
+  turista = 'turista',
+}

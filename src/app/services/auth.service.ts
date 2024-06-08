@@ -7,10 +7,11 @@ import { UserInterface } from "../interfaces/user.interface";
 @Injectable (
     { providedIn: 'root' }    
 )
-export class AuthService {    
+export class AuthService {       
+    user: UserInterface | null | undefined;
     userLogged = this.firebaseAuth.authState;
     currentUserSignal = signal<UserInterface| null | undefined>(undefined);
-
+    
     constructor(private firebaseAuth: AngularFireAuth){        
     }      
     
@@ -21,24 +22,29 @@ export class AuthService {
                 return updateProfile(response.user!, {displayName: username});
             });            
         return from(promise);
-    }    
+    }        
 
     login(email: string, password: string): Observable<void>{
         const promise = this.firebaseAuth.signInWithEmailAndPassword(email,password)
-        .then(userCredential =>{      
-            console.log("SERVICE")     
-            if (userCredential.user) {
-                console.log(userCredential.user)     
-                const user: UserInterface = {
-                  //id: userCredential.user.uid!,
-                  username: userCredential.user.displayName!,
-                  email: userCredential.user.email!,
-                  //displayName: userCredential.user.displayName,
-                  // Otros campos según tu UserInterface
-                };
-                this.currentUserSignal.set(user);                
-              }
-        })
+        .then(userCredential =>{           
+            if(userCredential.user){
+              console.log("User Logged.");
+              this.firebaseAuth.authState.subscribe(loggedUser => {
+                    if(loggedUser){                     
+                    const user: UserInterface = {
+                            //id: userCredential.user.uid!,
+                            username: loggedUser.displayName!,
+                            email: loggedUser.email!,                                   
+                        };
+                        this.currentUserSignal.set(user)
+                        //console.log(this.currentUserSignal());
+                    }else{
+                        //console.log('User is logged out');
+                        this.currentUserSignal.set(null);        
+                    }
+                });
+            }              
+        });        
         return from(promise)
     }
 

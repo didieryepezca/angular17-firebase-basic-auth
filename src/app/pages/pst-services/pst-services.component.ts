@@ -29,7 +29,7 @@ export class PstServicesComponent implements OnInit {
         pst.imgSrc = '/assets/images/products/p2.jpg'
       });
       this.pstServiceContract.pstServicesSig.set(this.pstsArray);
-      //console.log(this.pstsArray);
+      //console.log(this.pstServiceContract.pstServicesSig());
     }) 
   }
 
